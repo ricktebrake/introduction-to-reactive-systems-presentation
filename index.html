@@ -7,7 +7,7 @@
     <title>Introduction to reactive systems</title>
 
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/theme/league.css">
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -65,10 +65,13 @@
             </section>
             <section data-markdown>
 
-                <script type="text/template">
+                <script type="text/template" data-separator-notes="^Note:">
                     ## Responsive
 
                     * Focus on providing rapid and consistent response times
+
+                    Note:
+                    In order to facilitate Responsiveness, two challenges need to be faced: being Responsive under failure, defined as Resilience, and being Responsive under load,
 
                 </script>
             </section>
@@ -90,13 +93,13 @@
             </section>
 
             <section data-markdown>
-                <script type="text/template">
+                <script type="text/template" data-separator-notes="^Note:">
                     ## Resilient
 
                     * Stays responsive in the face of faillure
                     * Achieved by replication, containment, isolation and delegation
 
-                    <!-- Speaker notes
+                    Note:
                     Containment: isoleren van fouten
                     Delegation: Delegate recovery to another component
 
@@ -109,7 +112,6 @@
 
                     Coffee machine -> insert coins -> no beans
                     Insert coins -> signals out of coffee beans failure -> service guy -> refill beans -> gets coffee
-                    -->
                 </script>
 
             </section>
@@ -147,14 +149,7 @@
                 * Request information from a single service
 
             </section>
-            <section data-markdown>
-                ## Queries - Pitfalls
 
-                * Too many query's
-                    * Might indicate that boundaries are not correctly defined
-                    * Use them for example when data is fast-changing, complex or sensitive
-
-            </section>
             <section data-markdown>
                 ## Commands
 
@@ -163,13 +158,7 @@
                 * May return information about the result
 
             </section>
-            <section data-markdown>
-                ## Commands - Pitfalls
 
-                * Too many commands
-                    *
-
-            </section>
             <section data-markdown>
                 ## Events
 
@@ -178,12 +167,52 @@
                 * Publisher doesn't care if somebody listens
 
             </section>
+        </section>
+
+        <section>
+            <section data-markdown>
+                ## Building reactive systems
+            </section>
+            <section data-markdown>
+                ## Start thinking about events
+
+                * Explore what happens
+                * Explore what triggers events
+            </section>
+
+            <section data-markdown>
+                ## Aggregate
+            </section>
+
+            
+            <section data-markdown>
+                # Pitfalls
+            </section>
             <section data-markdown>
                 ## Events - Pitfalls
 
                 * Published too early
                 * Uninformative events
                 * Events as commands
+            </section>
+            <section data-markdown>
+                ## Commands - Pitfalls
+
+                * Too many commands
+                *
+
+            </section>
+            <section data-markdown>
+                ## Queries - Pitfalls
+
+                * Too many query's
+                * Might indicate that boundaries are not correctly defined
+                * Use them for example when data is fast-changing, complex or sensitive
+
+            </section>
+
+            <section data-markdown>
+
             </section>
         </section>
 
@@ -213,6 +242,7 @@
     // - https://github.com/hakimel/reveal.js#configuration
     // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
+        center: false,
         dependencies: [
             {src: 'plugin/markdown/marked.js'},
             {src: 'plugin/markdown/markdown.js'},
