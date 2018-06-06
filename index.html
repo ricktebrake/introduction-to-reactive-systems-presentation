@@ -220,31 +220,32 @@
             </section>
 
             <section data-markdown>
-                ## Pitfalls
+
+
+                <script type="text/template">
+                    ### Event sourcing
+                    * Save all events in a log <!-- .element: class="fragment" -->
+                    * Derive 'read models' from the log (CQRS) <!-- .element: class="fragment" -->
+                    * Replay events <!-- .element: class="fragment" -->
+                </script>
+
             </section>
 
             <section data-markdown data-separator-notes="^Note:">
-                ### Queries
+                ## Pitfalls
 
-                * Too many query's
+                ### .........
+
 
                 Note:
+
+                * Too many query's
+                * Uninformative events
+                * Forgetting about support
                 * Use them for example when data is fast-changing, complex or sensitive
                 * Might indicate that boundaries are not correctly defined
-
             </section>
 
-            <section data-markdown>
-                ### Events
-
-                * Published too early
-                * Uninformative events
-                * Events as commands
-            </section>
-
-            <section data-markdown>
-
-            </section>
         </section>
 
         <!--<section data-markdown>-->
