@@ -7,7 +7,7 @@
     <title>Introduction to reactive systems</title>
 
     <link rel="stylesheet" href="css/reveal.css">
-    <link rel="stylesheet" href="css/theme/league.css">
+    <link rel="stylesheet" href="css/theme/night.css">
 
     <!-- Theme used for syntax highlighting of code -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -31,37 +31,55 @@
 
             <section data-markdown>
                 <script type="text/template">
-                    ## Reactive systems != Reactive Programming
+                    ### Reactive
+                    ### systems
+                    ## !=
+                    ### Reactive
+                    ### programming
                 </script>
             </section>
             <section data-markdown>
-                <script type="text/template">
-                    ## Reactive programming
+                <script type="text/template" data-separator-notes="^Note:">
+                    ### Reactive programming
+                    ![](lib/images/reactive-programming.svg) <!-- .element height="50%" width="50%" -->
 
-                    * Programming model
-                    * Focused on streams of data
+                    Note:
+                    Programming model waarbij gereageerd wordt op events (Streams).
+                    Waarbij de verwerking van de events opgedeeld wordt in meerdere stappen die asynchroon / non blocking  uitgevoerd.
+
+                    Toegepast binnen 1 component
+
+                    RxJava
+                    Project Reactor
+                    Vert.X
+                    Akka streams
+
                 </script>
             </section>
             <section data-markdown>
-                <script type="text/template">
-                    ## Reactive systems
+                <script type="text/template" data-separator-notes="^Note:">
+                    ### Reactive systems
 
-                    * Architectural style
-                    * Set of design principles
+                    ![](lib/images/reactive-system-architecture.png) <!-- .element height="60%" width="60%" -->
+
+                    Note:
+                    Set van design principes welke de interactie tussen verschillende componenten in een systeem beschrijft.
+
                 </script>
+
             </section>
         </section>
         <section>
             <section data-markdown>
-                ## Reactive Manifesto
+                <script type="text/template" data-separator-notes="^Note:">
+                    ## Reactive Manifesto
 
-                https://reactivemanifesto.org
+                    https://reactivemanifesto.org
 
-                Published in 2013 to provide a common vocabulary for disussing the design of reactive systems
+                    Published in 2013 to provide a common vocabulary for disussing the design of reactive systems
 
-
-                <!--TODO Add examples per section (Elastic: autoscaling, blue/green deployment, load balancers -->
-
+                    ![](lib/images/reactive-systems-diagram.jpg) <!-- .element height="40%" width="40%" -->
+                </script>
             </section>
             <section data-markdown>
 
@@ -70,13 +88,14 @@
 
                     * Focus on providing rapid and consistent response times
 
+
                     Note:
                     In order to facilitate Responsiveness, two challenges need to be faced: being Responsive under failure, defined as Resilience, and being Responsive under load,
 
                 </script>
             </section>
             <section data-markdown>
-                <script type="text/template">
+                <script type="text/template" data-separator-notes="^Note:">
                     ## Elastic
 
                     * Stays responsive under varying workload
@@ -84,9 +103,8 @@
                     * Design without central bottlenecks
                     * Be able to replicate components
 
-                    <!-- Speaker notes
+                    Note:
                     No bottlenecks: Mogelijkheid moet hebben om componenten op te delen en te repliceren
-                    -->
 
 
                 </script>
@@ -126,27 +144,21 @@
                     * Loose coupling
                 </script>
             </section>
-            <section data-markdown>
-                <script type="text/template">
-                    ## Message Driven - Back Pressure
-
-
-
-                </script>
-            </section>
         </section>
         <section>
             <section data-markdown>
                 ## Messages
 
-                * Queries
-                * Commands
-                * Events
+                ![](lib/images/messages.png) <!-- .element height="100%" width="100%" -->
             </section>
-            <section data-markdown>
+            <section data-markdown data-separator-notes="^Note:">
                 ## Queries
 
                 * Request information from a single service
+                * Usually synchronous
+
+                Note:
+                Query's van de UI naar de backend hier los van zien, de UI is onderdeel van het component.
 
             </section>
 
@@ -173,63 +185,82 @@
             <section data-markdown>
                 ## Building reactive systems
             </section>
-            <section data-markdown>
-                ## Start thinking about events
 
-                * Explore what happens
+            <section data-markdown>
+                ### Don't build microliths
+
+                ![](lib/images/microliths.jpg) <!-- .element height="40%" width="40%" -->
+            </section>
+
+            <section data-markdown>
+                ### Start thinking about events
+
+                * Explore what happens in the system
                 * Explore what triggers events
+                * Group events
+                * Find out how events flow trough the system
             </section>
 
             <section data-markdown>
-                ## Aggregate
+                ### The truth is the log.
+                ### The database is a cache of a subset of the log.
+
+                *- Pat Helland - *
+
             </section>
 
-            
             <section data-markdown>
-                # Pitfalls
+
+
+                <script type="text/template">
+                    ### Event sourcing
+                    ![](lib/images/microsystem.jpg) <!-- .element height="65%" width="65%" -->
+                </script>
+
             </section>
+
             <section data-markdown>
-                ## Events - Pitfalls
+                ## Pitfalls
+            </section>
+
+            <section data-markdown data-separator-notes="^Note:">
+                ### Queries
+
+                * Too many query's
+
+                Note:
+                * Use them for example when data is fast-changing, complex or sensitive
+                * Might indicate that boundaries are not correctly defined
+
+            </section>
+
+            <section data-markdown>
+                ### Events
 
                 * Published too early
                 * Uninformative events
                 * Events as commands
             </section>
-            <section data-markdown>
-                ## Commands - Pitfalls
-
-                * Too many commands
-                *
-
-            </section>
-            <section data-markdown>
-                ## Queries - Pitfalls
-
-                * Too many query's
-                * Might indicate that boundaries are not correctly defined
-                * Use them for example when data is fast-changing, complex or sensitive
-
-            </section>
 
             <section data-markdown>
 
             </section>
         </section>
 
-        <section data-markdown>
-            ## When to use
+        <!--<section data-markdown>-->
+        <!--## When to use-->
 
-            * Need for development scaling
-            * Need for application scaling
-            * Need for high availability
-        </section>
-        <section data-markdown>
-            ## When not to use
+        <!--* Need for development scaling-->
+        <!--* Need for application scaling-->
+        <!--* Need for high availability-->
+        <!--</section>-->
+        <!--<section data-markdown>-->
+        <!--## When not to use-->
 
-            * When you are not familiar with the domain
-            * Working in a small organization
-            * ...
-        </section>
+        <!--* When you are not familiar with the domain-->
+        <!--* Working in a small organization-->
+        <!--* ...-->
+        <!--</section>-->
 
     </div>
 </div>
@@ -242,7 +273,6 @@
     // - https://github.com/hakimel/reveal.js#configuration
     // - https://github.com/hakimel/reveal.js#dependencies
     Reveal.initialize({
-        center: false,
         dependencies: [
             {src: 'plugin/markdown/marked.js'},
             {src: 'plugin/markdown/markdown.js'},
