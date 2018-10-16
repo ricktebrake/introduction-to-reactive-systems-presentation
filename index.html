@@ -86,11 +86,16 @@
                 <script type="text/template" data-separator-notes="^Note:">
                     ## Responsive
 
-                    * Focus on providing rapid and consistent response times
+
+                    Deliver a good user experience by focusing on providing rapid and consistent response times
 
 
                     Note:
-                    In order to facilitate Responsiveness, two challenges need to be faced: being Responsive under failure, defined as Resilience, and being Responsive under load,
+                    Systemen bestaan vaak uit veel verschillende componenten.
+                    Mogelijk verspreid over de hele wereld.
+                    Toch wil de gebruiker een snelle response
+                    Om dit te bereiken zijn er 2 uitdagingen:
+                    Responsive bij wisselende load en responsive bij falen
 
                 </script>
             </section>
@@ -114,12 +119,19 @@
                 <script type="text/template" data-separator-notes="^Note:">
                     ## Resilient
 
-                    * Stays responsive in the face of faillure
+                    * Stays responsive in the face of failure
                     * Achieved by replication, containment, isolation and delegation
 
                     Note:
-                    Containment: isoleren van fouten
+                    Replication: (Link naar Elastic)
+                    Containment: Isoleren van fouten (Circuit breaker, backup scenario wanneer echte service niet bereikbaar is)
                     Delegation: Delegate recovery to another component
+
+                    Isolation: Zorg dat componenten niet direct van elkaar afhankelijk zijn (Geen runtime dependencies)
+                    (Link naar messaging
+
+                    The client of a component is not responsible for handling it's faillure
+
 
                     Failures need to be:
                     1. Contained
@@ -128,38 +140,43 @@
                     4. Observed - By 1-N
                     5. Managed
 
-                    Coffee machine -> insert coins -> no beans
-                    Insert coins -> signals out of coffee beans failure -> service guy -> refill beans -> gets coffee
                 </script>
 
             </section>
 
 
             <section data-markdown>
-                <script type="text/template">
+                <script type="text/template" data-separator-notes="^Note:">
                     ## Message Driven
 
                     * Relies on asynchronous message passing
                     * Establish boundaries between components
                     * Loose coupling
+                    * Non blocking communication
+
+                    Note:
+                    Link to next:
                 </script>
             </section>
         </section>
         <section>
             <section data-markdown>
-                ## Messages
+                <script type="text/template" data-separator-notes="^Note:">
+                    ## Messages
 
-                ![](lib/images/messages.png) <!-- .element height="100%" width="100%" -->
+                    ![](lib/images/messages.png) <!-- .element height="40%" width="40%" -->
+                </script>
             </section>
             <section data-markdown data-separator-notes="^Note:">
                 ## Queries
 
                 * Request information from a single service
-                * Usually synchronous
+                * Direct response required
 
                 Note:
                 Query's van de UI naar de backend hier los van zien, de UI is onderdeel van het component.
-
+                Image src:
+                https://www.slideshare.net/Typesafe_Inc/reactive-revealed-p1-async-nio-backpressure-and-message-vs-eventdriven-51110576?from_action=save
             </section>
 
             <section data-markdown>
@@ -171,12 +188,19 @@
 
             </section>
 
-            <section data-markdown>
+            <section data-markdown data-separator-notes="^Note:">
                 ## Events
 
                 * Describe something that has happened
                 * For everybody that is interested
                 * Publisher doesn't care if somebody listens
+
+                Note:
+                Events beschrijven een gebeurtenis
+                Bestelling geplaatst
+                Klant geregistreerd
+                Beweging gedetecteerd
+
 
             </section>
         </section>
@@ -186,19 +210,75 @@
                 ## Building reactive systems
             </section>
 
-            <section data-markdown>
+            <section data-markdown data-separator-notes="^Note:">
                 ### Don't build microliths
 
                 ![](lib/images/microliths.jpg) <!-- .element height="40%" width="40%" -->
+
+                Note:
+                Traditionele monolitische applicaties zijn vaak gecentreerd rondom database entiteiten.
+                Als je dit rechtstreeks vertaald naar microservices krijg je services rondom entiteiten.
+                Dan is alles nog steeds sterk gekoppeld aan elkaar.
             </section>
 
-            <section data-markdown>
+            <section data-markdown data-separator-notes="^Note:">
                 ### Start thinking about events
 
                 * Explore what happens in the system
                 * Explore what triggers events
                 * Group events
                 * Find out how events flow trough the system
+
+                Note:
+                In plaats daarvan gaan we beginnen met wat er gebeurt in het systeem.
+            </section>
+
+            <section data-markdown data-separator-notes="^Note:">
+                ### Generate event streams
+
+                * Build components that validate and process commands
+                * Create events and save them to an event store
+
+            </section>
+
+            <section data-markdown data-separator-notes="^Note:">
+                ### Process events
+
+                * Build components that process the data inside the events
+                * And generate new events
+                * Or save the processed data in a database
+
+                Note:
+                We hebben nu een systeem waar events gegenereerd en verwerkt worden. Nu hebben we nog iets nodig om de data ook te
+                presenteren
+            </section>
+
+            <section data-markdown data-separator-notes="^Note:">
+                ### Present data
+
+                * Build components that read the data
+
+                Note:
+                De databases kunnen voor een heel specifiek doel gebruikt:
+                Webshop producten
+                Elasticsearch database om makkelijk te zoeken
+                Database voor productdetails
+                Voorraad database
+
+            </section>
+
+            <section data-markdown data-separator-notes="^Note:">
+                <script type="text/template">
+                    ### Event sourcing
+                    ![](lib/images/cqrs-overview.jpeg) <!-- .element height="65%" width="65%" -->
+
+                    Note:
+                    * Ik heb net eigenlijk de stappen genoemd om een event sourcing systeem op te zetten.
+                    * Samenvatting event sourcing.
+                    * De event log is inmutable
+
+
+                </script>
             </section>
 
             <section data-markdown>
@@ -209,41 +289,26 @@
 
             </section>
 
-            <section data-markdown>
-
-
-                <script type="text/template">
-                    ### Event sourcing
-                    ![](lib/images/microsystem.jpg) <!-- .element height="65%" width="65%" -->
-                </script>
+            <section data-background-image="lib/images/microsystem.jpg" data-background-size="contain">
 
             </section>
 
-            <section data-markdown>
-
-
-                <script type="text/template">
-                    ### Event sourcing
-                    * Save all events in a log <!-- .element: class="fragment" -->
-                    * Derive 'read models' from the log (CQRS) <!-- .element: class="fragment" -->
-                    * Replay events <!-- .element: class="fragment" -->
-                </script>
-
+            <section data-background-image="lib/images/reactive-system-architecture.png" data-background-size="contain">
             </section>
-
             <section data-markdown data-separator-notes="^Note:">
-                ## Pitfalls
+                ## Things to consider
 
-                ### .........
+                * Eventual consistency
+                * Managing multiple 'realities'
+                * Partial failures
+                * Failure detection
+                * Migrating existing applications
+                * ............
 
 
                 Note:
 
-                * Too many query's
-                * Uninformative events
-                * Forgetting about support
-                * Use them for example when data is fast-changing, complex or sensitive
-                * Might indicate that boundaries are not correctly defined
+                Messaging forces us to embrace the reality and constraints of distributed systems
             </section>
 
         </section>
