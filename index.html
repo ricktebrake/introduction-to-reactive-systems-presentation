@@ -154,10 +154,16 @@
                     * Non blocking communication
 
                     Note:
+
+                    Employing explicit message-passing enables load management, elasticity,
+                    and flow control by shaping and monitoring the message queues
+                    in the system and applying back-pressure when necessary.
+
                     Link to next:
                 </script>
             </section>
         </section>
+
         <section>
             <section data-markdown>
                 <script type="text/template" data-separator-notes="^Note:">
@@ -243,7 +249,7 @@
             <section data-markdown data-separator-notes="^Note:">
                 ### Process events
 
-                * Build components that process the data inside the events
+                * Build components that listen to events and process the data inside
                 * And generate new events
                 * Or save the processed data in a database
 
